@@ -1,0 +1,17 @@
+.page{
+    text-align: center;
+}
+
+img{
+    width: 57.5px;
+    height: 57.5px;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+}
+
+.logout{
+    position: absolute;
+    right: 0px;
+    top: 60px;
+}

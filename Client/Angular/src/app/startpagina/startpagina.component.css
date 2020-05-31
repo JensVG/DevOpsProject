@@ -1,0 +1,21 @@
+.StartPage{
+    position: absolute;
+    top: 150px;
+    text-align: center;
+}
+
+table{
+    margin-top: 5%;
+    border-collapse: collapse;
+}
+
+th {
+    background-color: red;
+    color: white;
+}
+
+th, td {
+    border: 2px solid black;
+    text-align: center;
+    
+}

@@ -1,0 +1,25 @@
+<div class="page">
+  <div *ngIf="auth.user$ | async; then authenticated else guest">
+    <!-- template will replace this div -->
+  </div>
+
+  <!-- User NOT logged in -->
+  <ng-template #guest>
+    <h1>Jupiler Pro League</h1>
+    <p>Login om verder te geraken</p>
+
+    <button (click)="auth.googleSignin()">
+      <i class="fa fa-google"></i>Login met Google
+    </button>
+  </ng-template>
+
+
+  <!-- User logged in -->
+  <ng-template #authenticated>
+    <app-navigatie></app-navigatie>
+    <div *ngIf="auth.user$ | async as user">
+      <img [src]="user.photoURL">
+      <button class="logout" (click)="auth.signOut()">Log uit</button>
+    </div>
+  </ng-template>
+</div>

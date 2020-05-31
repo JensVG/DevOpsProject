@@ -1,0 +1,14 @@
+<p-panel>
+    <p-header>
+        <img [src]="img">
+      <div class="ui-toolbar-group-left">
+        <button pButton type="button" label="start" class="ui-button-secondary" [routerLink]="['/start']"
+          [routerLinkActive]="['ui-button-info']"></button>
+        <button pButton type="button" label="spelers" class="ui-button-secondary" [routerLink]="['/spelers']"
+          [routerLinkActive]="['ui-button-info']"></button>
+        <button pButton type="button" label="ploegen" class="ui-button-secondary" [routerLink]="['/ploegen']"
+          [routerLinkActive]="['ui-button-info']"></button>
+      </div>
+      <router-outlet></router-outlet>
+    </p-header>
+  </p-panel>

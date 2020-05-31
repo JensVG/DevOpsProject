@@ -1,0 +1,112 @@
+<div class="PloegenPage">
+  <div class="InfoPloegen">
+    <strong>Lijst van alle ploegen</strong>
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Ploegnaam</th>
+        <th>Gemeente</th>
+        <th>Website</th>
+        <th>Stamnummer</th>
+        <th>Gewonnen</th>
+        <th>Verloren</th>
+        <th>Gelijkspel</th>
+        <th>Punten</th>
+      </tr>
+      <tr *ngFor="let info of PloegenInfo">
+        <td>{{info.id}}</td>
+        <td>{{info.ploegNaam}}</td>
+        <td>{{info.gemeente}}</td>
+        <td><a href={{info.website}}>{{info.website}}</a></td>
+        <td>{{info.stamnummer}}</td>
+        <td>{{info.gewonnen}}</td>
+        <td>{{info.verloren}}</td>
+        <td>{{info.gelijkspel}}</td>
+        <td>{{info.punten}}</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="GetOnId">
+    <strong>Kies hier het ID van de ploeg waar je meer informatie over wilt weten.</strong><br>
+    <span *ngIf="validationgetid == true">Vul zeker alle gegevraagde gegevens in</span><br>
+    <div class="KiesVeld">
+      <select [(ngModel)]="Idploegget">
+        <option *ngFor="let info of PloegenInfo" value="{{info.id}}">{{info.id}}</option>
+      </select>
+      <button (click)="SearchPloegOnID(Idploegget)">Bevestig</button>
+    </div>
+    <div *ngIf="PloegInfo">
+      <p>ID: {{PloegInfo.id}}</p>
+      <p>Ploegnaam: {{PloegInfo.ploegNaam}}</p>
+      <p>Gemeente: {{PloegInfo.gemeente}}</p>
+      <p>Website: <a href={{PloegInfo.website}}>{{PloegInfo.website}}</a></p>
+      <p>Stamnummer: {{PloegInfo.stamnummer}}</p>
+      <p>Gewonnen: {{PloegInfo.gewonnen}}</p>
+      <p>Verloren: {{PloegInfo.verloren}}</p>
+      <p>Gelijkspel: {{PloegInfo.gelijkspel}}</p>
+      <p>Punten: {{PloegInfo.punten}}</p>
+    </div>
+  </div>
+
+  <div class="Delete">
+    <strong>Kies hier het ID van de ploeg die je wilt verwijderen.</strong><br>
+    <span *ngIf="validationdelete == true">Vul zeker alle gegevraagde gegevens in</span><br>
+    <select [(ngModel)]="Idploegdelete">
+      <option *ngFor="let info of PloegenInfo" value="{{info.id}}">{{info.id}}</option>
+    </select>
+    <button (click)="DeletePloegOnID(Idploegdelete)">Bevestig</button>
+  </div>
+
+  <div class="Update">
+    <strong>Update hier een bestaande ploeg</strong>
+    <p>IDploeg:</p>
+    <input type="text" name="id" #id>
+    <br><br>
+    <p>Ploegnaam:</p>
+    <input type="text" name="ploegnaam" #ploegnaam>
+    <br><br>
+    <p>Gemeente:</p>
+    <input type="text" name="gemeente" #gemeente>
+    <br><br>
+    <p>Website:</p>
+    <input type="text" name="website" #website>
+    <br><br>
+    <p>Stamnummer:</p>
+    <input type="number" name="stamnummer" #stamnummer>
+    <br><br>
+    <p>Gewonnen:</p>
+    <input type="number" name="gewonnen" #gewonnen>
+    <br><br>
+    <p>Verloren:</p>
+    <input type="number" name="verloren" #verloren>
+    <br><br>
+    <p>Gelijkspel:</p>
+    <input type="number" name="gelijkspel" #gelijkspel>
+    <br><br>
+    <p>Punten:</p>
+    <input type="number" name="punten" #punten>
+    <br><br>
+    <button click="CreatePloeg()">Update Ploeg</button>
+  </div>
+
+  <div class="Creer">
+    <strong>Maak hier een nieuwe ploeg</strong>
+    <br><br>
+    <p>Ploegnaam:</p>
+    <input type="text" [(ngModel)]="PloegnaamNewPloeg">
+    <br><br>
+    <p>Gemeente:</p>
+    <input type="text" [(ngModel)]="GemeenteNewPloeg">
+    <br><br>
+    <p>Website:</p>
+    <input type="text" [(ngModel)]="WebsiteNewPloeg">
+    <br><br>
+    <p>Stamnummer:</p>
+    <input type="number" min="1" max="99999" [(ngModel)]="StamnummerNewPloeg">
+    <br><br>
+    <span *ngIf="validationcreate == true">Vul zeker alle gegevraagde gegevens in</span>
+    <br><br>
+    <button (click)="CreatePloeg()">Maak Ploeg</button>
+  </div>
+</div>

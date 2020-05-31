@@ -1,0 +1,177 @@
+<div class="SpelersPage">
+  <div class="InfoSpelers">
+    <strong>Lijst van alle spelers</strong>
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Voornaam</th>
+        <th>Achternaam</th>
+        <th>Woonplaats</th>
+        <th>Email</th>
+        <th>Positie</th>
+        <th>Rugnummer</th>
+        <th>Gele Kaarten</th>
+        <th>Rode Kaarten</th>
+        <th>Aantal Goalen</th>
+        <th>Aantal Assisten</th>
+      </tr>
+      <tr *ngFor="let info of SpelersInfo">
+        <td>{{info.id}}</td>
+        <td>{{info.voornaam}}</td>
+        <td>{{info.achternaam}}</td>
+        <td>{{info.woonplaats}}</td>
+        <td>{{info.email}}</td>
+        <td>{{info.positie}}</td>
+        <td>{{info.rugnummer}}</td>
+        <td>{{info.geleKaarten}}</td>
+        <td>{{info.rodeKaarten}}</td>
+        <td>{{info.aantalGoalen}}</td>
+        <td>{{info.aantalAssisten}}</td>
+      </tr>
+    </table>
+    <button (click)="VorigePagina()" *ngIf="page != 1">Vorige</button>
+    <button [disabled]>{{page}}/{{maxPage}}</button>
+    <button (click)="VolgendePagina()" *ngIf="page != maxPage">Volgende</button>
+  </div>
+
+  <div class="sort">
+    <strong>Kies hier op wat je wilt sorteeren</strong><br>
+    <span *ngIf="validationsort == true">Vul zeker alle gegevraagde gegevens in</span><br>
+    <select [(ngModel)]="SorteerOp">
+      <option value="voornaam">voornaam</option>
+      <option value="achternaam">achternaam</option>
+      <option value="woonplaats">woonplaats</option>
+      <option value="rugnummer">rugnummer</option>
+    </select><br>
+    <strong>Kies hier hoe je wilt sorteeren</strong><br>
+    <select [(ngModel)]="SorteerMethode">
+      <option value="asc">voorwaarts</option>
+      <option value="desc">achterwaarts</option>
+    </select><br>
+    <button (click)="WayToSort()">Bevestig</button>
+  </div>
+
+  <div class="GetOnId">
+    <strong>Kies hier het ID van de speler waar je meer informatie over wilt weten.</strong><br>
+    <span *ngIf="validationgetid == true">Vul zeker alle gegevraagde gegevens in</span><br>
+    <div class="KiesVeld">
+      <select [(ngModel)]="Idspelerget">
+        <option *ngFor="let info of SpelersInfo" value="{{info.id}}">{{info.id}}</option>
+      </select>
+      <button (click)="SearchSpelerOnID(Idspelerget)">Bevestig</button>
+    </div>
+    <div *ngIf="SpelerInfo">
+      <p>ID: {{SpelerInfo.id}}</p>
+      <p>Naam: {{SpelerInfo.voornaam}}</p>
+      <p>Achternaam: {{SpelerInfo.achternaam}}</p>
+      <p>Woonplaats: {{SpelerInfo.woonplaats}}</p>
+      <p>Email: {{SpelerInfo.email}}</p>
+      <p>Positie: {{SpelerInfo.positie}}</p>
+      <p>Rugnummer: {{SpelerInfo.rugnummer}}</p>
+      <p>Gele Kaarten: {{SpelerInfo.geleKaarten}}</p>
+      <p>Rode Kaarten: {{SpelerInfo.rodeKaarten}}</p>
+      <p>Aantal Goalen: {{SpelerInfo.aantalGoalen}}</p>
+      <p>Aantal Assisten: {{SpelerInfo.aantalAssisten}}</p>
+    </div>
+  </div>
+
+  <div class="Delete">
+    <strong>Kies hier het ID van de speler die je wilt verwijderen.</strong><br>
+    <span *ngIf="validationdeleteid == true">Vul zeker alle gegevraagde gegevens in</span><br>
+    <select [(ngModel)]="Idspelerdelete">
+      <option *ngFor="let info of SpelersInfo" value="{{info.id}}">{{info.id}}</option>
+    </select>
+    <button (click)="DeleteSpelerOnID(Idspelerdelete)">Bevestig</button>
+  </div>
+
+  <div class="search">
+    <label>Typ hier op welke voornaam je wil opzoeken:</label><br>
+    <input [(ngModel)]="VoornaamSpelersInfo" type="text">
+    <button (click)="GetAllSpelersWithName(VoornaamSpelersInfo)">Bevestig</button>
+    <div *ngFor="let info of VoornaamSpelersInfo">
+      <p>ID: {{info.id}}</p>
+      <p>Naam: {{info.voornaam}}</p>
+      <p>Achternaam: {{info.achternaam}}</p>
+      <p>Woonplaats: {{info.woonplaats}}</p>
+      <p>Email: {{info.email}}</p>
+      <p>Positie: {{info.positie}}</p>
+      <p>Rugnummer: {{info.rugnummer}}</p>
+      <p>Gele Kaarten: {{info.geleKaarten}}</p>
+      <p>Rode Kaarten: {{info.rodeKaarten}}</p>
+      <p>Aantal Goalen: {{info.aantalGoalen}}</p>
+      <p>Aantal Assisten: {{info.aantalAssisten}}</p>
+    </div>
+  </div>
+
+  <div class="Update">
+    <strong>Update hier een bestaande speler</strong>
+    <p>IDSpeler:</p>
+    <input type="text" [(ngModel)]="IDUpdateSpeler">
+    <br><br>
+    <p>Voornaam:</p>
+    <input type="text" [(ngModel)]="VoornaamUpdateSpeler">
+    <br><br>
+    <p>Achternaam:</p>
+    <input type="text" [(ngModel)]="AchternaamUpdateSpeler">
+    <br><br>
+    <p>Woonplaats:</p>
+    <input type="text" [(ngModel)]="WoonplaatsUpdateSpeler">
+    <br><br>
+    <p>Email:</p>
+    <input type="email" [(ngModel)]="EmailUpdateSpeler">
+    <br><br>
+    <p>Rugnummer:</p>
+    <input type="number" min="1" max="99" [(ngModel)]="RugnummerUpdateSpeler">
+    <br><br>
+    <p>Aantal Gele Kaarten:</p>
+    <input type="number" min="0" [(ngModel)]="GeleKaartenUpdateSpeler">
+    <br><br>
+    <p>Aantal Rode Kaarten:</p>
+    <input type="number" min="0" [(ngModel)]="RodeKaartenUpdateSpeler">
+    <br><br>
+    <p>Aantal Assisten:</p>
+    <input type="number" min="0" [(ngModel)]="AantalAssistenUpdateSpeler">
+    <br><br>
+    <p>Aantal Goalen:</p>
+    <input type="number" min="0" [(ngModel)]="AantalGoalenUpdateSpeler">
+    <br><br>
+    <p>Positie:</p>
+    <select [(ngModel)]="PositieUpdateSpeler">
+      <option value="Keeper">Keeper</option>
+      <option value="Verdediger">Verdediger</option>
+      <option value="Middenvelder">Middenvelder</option>
+      <option value="Aanvaller">Aanvaller</option>
+    </select>
+    <br><br>
+    <button (click)="UpdateSpeler()">Update speler</button>
+  </div>
+
+  <div class="Creer">
+    <strong>Maak hier een nieuwe speler</strong>
+    <br><br>
+    <p>Voornaam:</p>
+    <input type="text" [(ngModel)]="VoornaamNewSpeler">
+    <br><br>
+    <p>Achternaam:</p>
+    <input type="text" [(ngModel)]="AchternaamNewSpeler">
+    <br><br>
+    <p>Woonplaats:</p>
+    <input type="text" [(ngModel)]="WoonplaatsNewSpeler">
+    <br><br>
+    <p>Email:</p>
+    <input type="email" [(ngModel)]="EmailNewSpeler">
+    <br><br>
+    <p>Rugnummer:</p>
+    <input type="number" min="1" max="99" [(ngModel)]="RugnummerNewSpeler"><br><br>
+    <p>Positie:</p>
+    <select [(ngModel)]="PositieNewSpeler">
+      <option value="Keeper">Keeper</option>
+      <option value="Verdediger">Verdediger</option>
+      <option value="Middenvelder">Middenvelder</option>
+      <option value="Aanvaller">Aanvaller</option>
+    </select><br><br>
+    <span *ngIf="validationcreate == true">Vul zeker alle gegevraagde gegevens in</span>
+    <br><br>
+    <button (click)="CreateSpeler()">Maak Speler</button>
+  </div>
+</div>
