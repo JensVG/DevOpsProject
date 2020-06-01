@@ -79,8 +79,6 @@ cmd: dotnet restore /home/ansible/project/VoetbalAPI
 command:
 cmd: dotnet build /home/ansible/project/VoetbalAPI
 
--name
-
 - name: screen
 apt:
 name: screen
