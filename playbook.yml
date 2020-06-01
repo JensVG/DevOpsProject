@@ -1,0 +1,105 @@
+---
+- hosts: all
+remote_user: root
+tasks:
+
+- name: machine update
+apt:
+upgrade: dist
+
+- name: curl
+apt:
+name: curl
+state: latest
+
+- name: wget
+apt:
+name: wget
+state: present
+
+- name: nodejs
+apt:
+name: nodejs
+state: present
+update_cache: yes
+
+- name: Download MS product repo
+get_url:
+url: https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb
+dest: /tmp/packages-microsoft-prod.deb
+
+- name: Install MS product repo
+apt: deb=/temp/packages-microsoft-prod.deb
+become: true
+
+- name: HTTPS supporting
+apt:
+name: apt-transport-https
+state: latest
+update_cache: no
+become: true
+
+- name: Install .Net Core SDK
+apt:
+name: dotnet-sdk-3.1
+state: latest
+update_cache: yes
+become: true
+
+- name: Install apache
+apt:
+name: apache2
+state: latest
+
+- name: Install git
+apt:
+name: git
+state: latest
+
+- name: check file exists
+stat:
+path: /home/ansible/project
+register: stat_result
+
+- name: create file if it doesnt exist already
+file:
+path: /home/ansible/project
+state: absent
+when: stat_result.stat.exists
+
+- name: get repo from github
+command:
+cmd: git clone https://github.com/JensVG/DevOpsProject.git /home/ansible/project
+
+- name: restore
+command:
+cmd: dotnet restore /home/ansible/project/VoetbalAPI
+
+- name: build
+command:
+cmd: dotnet build /home/ansible/project/VoetbalAPI
+
+-name
+
+- name: screen
+apt:
+name: screen
+state: latest
+
+- name: delete html file
+file:
+path: /var/www/html
+state: absent
+
+- name: start apache
+command: systemctl start apache2
+
+- name: run
+command:
+cmd: screen -d -m dotnet run /home/ansible/project/Client/Angular
+
+
+
+
+
+
